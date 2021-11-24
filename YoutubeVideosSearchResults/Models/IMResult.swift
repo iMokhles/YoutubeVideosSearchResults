@@ -9,10 +9,12 @@ import Foundation
 
 class IMResultItem: ObservableObject, Identifiable {
     var id: String = UUID().uuidString
-  var thumbUrl: String
-  
-    init(thumbUrl: String = "") {
-    self.thumbUrl = thumbUrl
+    var thumbUrl: String
+    var videoUrl: String
+
+    init(thumbUrl: String = "", videoUrl: String = "") {
+        self.thumbUrl = thumbUrl
+        self.videoUrl = videoUrl
   }
 }
 
@@ -70,17 +72,17 @@ class IMResult: ObservableObject {
                     // Do this
                     let videoRenderer = (resultItem as! NSDictionary)["videoRenderer"]
                     if ((videoRenderer) != nil) {
+                        let videoId = (videoRenderer as! NSDictionary)["videoId"]
                         let thumbnail = (videoRenderer as! NSDictionary)["thumbnail"]
                         let thumbnails = (thumbnail as! NSDictionary)["thumbnails"] as! NSArray
                         let bigThumb = thumbnails.lastObject;
                         let bigThumbUrl = (bigThumb as! NSDictionary)["url"];
-
-                        let nResultItem = IMResultItem(thumbUrl: bigThumbUrl as! String);
+                        let videoUrl = String(format: "https://www.youtube.com/embed/%@", videoId as! CVarArg);
+                        print("videoUrl: \(videoUrl)")
+                        let nResultItem = IMResultItem(thumbUrl: bigThumbUrl as! String, videoUrl: videoUrl);
                         self.results.append(nResultItem);
                     }
-
                 }
-                
                 print(self.results)
             }
         }.resume()

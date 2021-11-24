@@ -14,6 +14,7 @@ struct IMResultList: View {
         List{
             ForEach(results) { item in
                             IMResultListCell(resultItem: item)
+                                .frame(height: 250)
                         }
         }
     }
