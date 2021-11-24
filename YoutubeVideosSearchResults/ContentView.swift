@@ -19,7 +19,6 @@ struct ContentView: View {
             VStack {
                 HStack {
                     Text("YouTube Seach").font(.system(size: 40, weight: .black, design: .rounded))
-                                        
                 }
                 .padding()
                 IMSearchBar(query: $result.queryText, onSubmit: {
@@ -27,7 +26,6 @@ struct ContentView: View {
                 })
                 .padding(.top, -20)
                 IMResultList(results: $result.results)
-
             }
         }
     }
