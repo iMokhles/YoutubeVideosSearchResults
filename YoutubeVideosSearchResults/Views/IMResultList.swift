@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct IMResultList: View {
+    @Binding var results: [IMResultItem]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List{
+            ForEach(results) { item in
+                            IMResultListCell(resultItem: item)
+                        }
+        }
     }
 }
 
 struct IMResultList_Previews: PreviewProvider {
     static var previews: some View {
-        IMResultList()
+        IMResultList(results: .constant([IMResultItem(thumbUrl: "")]))
     }
 }
